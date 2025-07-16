@@ -9,6 +9,12 @@ module.exports = {
       "src/hooks/*.ts"
     ],
     paths: ["src/test/features/*.feature"],
+    format: [
+      "progress-bar",
+      "html:reports/cucumber-report.html",
+      "json:test-results/cucumber-report.json",
+      "rerun:rerun.txt"
+    ],
     requireModule: ["ts-node/register"]
   },
 
@@ -20,6 +26,11 @@ module.exports = {
     require: [
       "src/test/steps/*.ts",
       "src/hooks/*.ts"
+    ],
+    format: [
+      "progress-bar",
+      "html:reports/cucumber-rerun-report.html",
+      "json:test-results/cucumber-rerun.json"
     ],
     requireModule: ["ts-node/register"]
   }

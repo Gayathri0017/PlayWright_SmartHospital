@@ -12,9 +12,10 @@ let t:string;
     When('clicks the plus icon to add a task', async function () {
             await todolist.ClickaddTask();
          });
-    When('fills in the task {string} with date {string}', async function (task: string, date: string) {
+   When('fills in the task {string} with date {string}',{ timeout: 10000 },async function (task: string, date: string) {
         await todolist.addTask(task, date);
-        });
+    }
+    );
     Then('the {string} should be visible in the To Do List', async function (expected: string) {
         if(expected=="Date field is required"){
             await todolist.verifyError(expected);

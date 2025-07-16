@@ -31,20 +31,40 @@ export default class TodoListPage{
     //     await this.page.waitForTimeout(1000);
     // } 
 
-    async addTask(task: string, date: string) {
-    const taskInput = this.page.locator(this.todoListPageElements.taskName);
-    const dateInput = this.page.locator(this.todoListPageElements.date);
-    const saveBtn = this.page.locator(this.todoListPageElements.saveBtn);
-    await taskInput.waitFor({ state: 'visible' });
-    // await taskInput.fill('');
+//     async addTask(task: string, date: string) {
+//     const taskInput = this.page.locator(this.todoListPageElements.taskName);
+//     const dateInput = this.page.locator(this.todoListPageElements.date);
+//     const saveBtn = this.page.locator(this.todoListPageElements.saveBtn);
+//     await taskInput.waitFor({ state: 'visible' });
+//     // await taskInput.fill('');
+//     await taskInput.fill(task);
+//     await dateInput.click();
+//     await dateInput.press('Control+A'); 
+//     await dateInput.press('Backspace');
+//     await dateInput.type(date);
+//     await this.page.waitForTimeout(500);
+//     await saveBtn.click();
+//     await this.page.waitForTimeout(4000);
+// }
+
+async addTask(task: string, date: string) {
+    const taskInput=this.page.locator(this.todoListPageElements.taskName);
+    const dateInput=this.page.locator(this.todoListPageElements.date);
+    const saveBtn=this.page.locator(this.todoListPageElements.saveBtn);
+    await taskInput.waitFor({ state: 'visible', timeout: 5000 });
     await taskInput.fill(task);
+    await dateInput.waitFor({ state: 'visible', timeout: 5000 });
     await dateInput.click();
-    await dateInput.press('Control+A'); 
+    await dateInput.fill('');
+    await dateInput.press('Control+A');
     await dateInput.press('Backspace');
-    await dateInput.type(date);
-    await this.page.waitForTimeout(500);
+    await dateInput.type(date, { delay: 100 });
+    await saveBtn.waitFor({ state: 'visible', timeout: 5000 });
     await saveBtn.click();
-    await this.page.waitForTimeout(4000);
+    const successToast = this.page.locator('//div[contains(@class,"toast") and contains(text(),"success")]');
+    await successToast.waitFor({ timeout: 5000 }).catch(() => {
+        console.log("No success toast, proceeding...");
+    });
 }
     async verifyTask(name: string) {
     const tasks=await pageFixture.page.locator(this.todoListPageElements.todoList);
