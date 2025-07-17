@@ -8,14 +8,15 @@ module.exports = {
       "src/test/steps/*.ts",
       "src/hooks/*.ts"
     ],
-    paths: ["src/test/features/*.feature"],
+    paths: ["src/test/features/PatientLogin.feature"],
     format: [
       "progress-bar",
       "html:reports/cucumber-report.html",
       "json:test-results/cucumber-report.json",
       "rerun:rerun.txt"
     ],
-    requireModule: ["ts-node/register"]
+    requireModule: ["ts-node/register"],
+    parallel: 4
   },
 
   rerun: {

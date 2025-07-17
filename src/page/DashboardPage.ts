@@ -8,18 +8,27 @@ export default class DashboardPage{
     }
 
     private DashboardPageElements = {
-        profile : "//div[@class='navbar-custom-menu']/ul/li[4]/a/img",
+        // profile : "//div[@class='navbar-custom-menu']/ul/li[4]/a/img",
+        profile : "//a[@class='dropdown-toggle']",
         verifyProfile : "//div[@class='navbar-custom-menu']/ul/li[4]/ul/li/div/div[1]//following-sibling::div/h5",
     }
 
     async clickProfile(){
         // await this.base.waitAndClick(this.DashboardPageElements.profile);
-        await this.page.locator(this.DashboardPageElements.profile).click();
+        const profile = await this.page.locator(this.DashboardPageElements.profile);
+        await profile.waitFor({ state: 'visible', timeout: 10000 }); // Increased wait
+        await profile.click();
+
     }
 
     async VerifyProfile(){
-        const profileName = await this.page.locator(this.DashboardPageElements.verifyProfile).textContent();
+        // const profileName = await this.page.locator(this.DashboardPageElements.verifyProfile).textContent();
 
-        expect(profileName).toContain("Patient");
+        // expect(profileName).toContain("Patient");
+        const nameLocator = this.page.locator(this.DashboardPageElements.verifyProfile);
+        await nameLocator.waitFor({ state: 'visible', timeout: 10000 });
+
+        const profileName = await nameLocator.textContent();
+        expect(profileName?.trim()).toContain("Patient");
     }
 }
