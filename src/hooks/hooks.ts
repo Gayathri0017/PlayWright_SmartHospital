@@ -31,10 +31,10 @@ After(async function({pickle,result}){
         await this.attach(img,"image/png");
     }
     // await pageFixture.logger?.close();
-    await pageFixture.page.close();
-    await context.close();
+    // await pageFixture.page.close();
+    // await context.close();
 });
-AfterAll(async function(){
-    // await pageFixture.logger?.close();
-    await browser.close();
-});
+// AfterAll(async function(){
+//     // await pageFixture.logger?.close();
+//     await browser.close();
+// });

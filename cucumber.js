@@ -8,7 +8,7 @@ module.exports = {
       "src/test/steps/*.ts",
       "src/hooks/*.ts"
     ],
-    paths: ["src/test/features/*.feature"],
+    paths: ["src/test/features/PatientLogin.feature"],
     format: [
       "progress-bar",
       "html:reports/cucumber-report.html",

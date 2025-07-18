@@ -8,7 +8,8 @@ export default class DashboardPage{
     }
 
     private DashboardPageElements = {
-        profile : "//div[@class='navbar-custom-menu']/ul/li[4]/a/img",
+        // profile : "//div[@class='navbar-custom-menu']/ul/li[4]/a/img",
+        profile : "//a[@class='dropdown-toggle']",
         verifyProfile : "//div[@class='navbar-custom-menu']/ul/li[4]/ul/li/div/div[1]//following-sibling::div/h5",
     }
 
@@ -19,7 +20,6 @@ export default class DashboardPage{
 
     async VerifyProfile(){
         const profileName = await this.page.locator(this.DashboardPageElements.verifyProfile).textContent();
-
-        expect(profileName).toContain("Patient");
+        await expect(profileName).toContain("Patient");
     }
 }
