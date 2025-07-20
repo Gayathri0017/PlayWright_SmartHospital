@@ -6,7 +6,9 @@ import SearchPage from "../../page/PatientSearch";
     let searchpage:SearchPage;
     Given('Doctor is logged in to the Smart Hospital system', { timeout: 20000 },async function () {
        loginpage=new LoginPage(pageFixture.page);
-       await loginpage.login();
+       //await loginpage.login();
+       await loginpage.doctorLogin();
+
     });
     When('the Doctor enters {string} in the search bar', async function (string) {
        searchpage=new SearchPage(pageFixture.page);

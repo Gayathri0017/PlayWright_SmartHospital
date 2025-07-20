@@ -11,20 +11,19 @@ BeforeAll(async function(){
     getEnv();
     browser=await invokeBrowser();
 });
-Before(async function({pickle}){
-    const scenarioName=pickle.name+pickle.id;
-    context=await browser.newContext();
-    const page= await browser.newPage();
-    pageFixture.page=page;
-    const baseUrl = process.env.BASEURL;
-       if (!baseUrl) {
-              throw new Error("BASEURL is not defined in environment variables");
-       }
-       await pageFixture.page.goto(baseUrl, 
-        { timeout: 10000 });
-    //pageFixture.logger=createLogger(options(scenarioName));
-});
-After(async function({pickle,result}){
+Before(async function({ pickle }) {
+    const scenarioName = pickle.name + pickle.id;
+    context = await browser.newContext();
+    const page = await browser.newPage();
+    pageFixture.page = page;
+    const baseUrl = "https://demo.smart-hospital.in/site/login";
+
+    if (!baseUrl) {
+        throw new Error("BASEURL is not defined in environment variables");
+    }
+
+    await pageFixture.page.goto(baseUrl, { timeout: 10000 });
+});After(async function({pickle,result}){
     console.log(result?.status);
     if(result?.status==Status.FAILED){
         const img=await pageFixture.page.screenshot({path:`./test-result/screenshots/${pickle.name}.png`,type:"png"})
