@@ -1,4 +1,4 @@
-Feature: Dhanush_16JulyLogin with the Patient Login Credentials
+Feature: Dhanush_16JULYLogin with the Patient Login Credentials
   
   Background: 
     Given the User is on the Login Page

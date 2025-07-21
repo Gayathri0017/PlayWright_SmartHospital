@@ -1,4 +1,4 @@
-Feature: Dhanush_11APR2025_Booking appointment using patient Login
+Feature: Dhanush_21JULY2025_Booking appointment using patient Login
 
 Background:
 	Given the User is on the Login Page

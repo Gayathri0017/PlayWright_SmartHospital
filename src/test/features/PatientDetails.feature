@@ -1,4 +1,4 @@
-Feature: Dhanush_20July2025_Getting Patient details
+Feature: Dhanush_20JULY2025_Getting Patient details
 
 Background:
   Given the User is on the Login Page

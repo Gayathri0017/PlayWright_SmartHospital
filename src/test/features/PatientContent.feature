@@ -1,4 +1,4 @@
-Feature: Dhanush_18July2025_Getting Content details from patient login
+Feature: Dhanush_18JULY2025_Getting Content details from patient login
 Background: 
     Given the User is on the Login Page
   	When the User clicks the Sign In button
