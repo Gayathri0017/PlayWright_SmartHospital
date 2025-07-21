@@ -1,7 +1,7 @@
 Feature: Login with the Patient Login Credentials
   
   Background: 
-  Given the User is on the Login Page
+    Given the User is on the Login Page
  	# When the User clicks the User Login 
  		
  		
