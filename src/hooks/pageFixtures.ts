@@ -4,5 +4,6 @@ import LoginPage from "../page/loginPage";
 export const pageFixture={
     // @ts-ignore
     page:undefined as Page,
+    testData: null
     // logger:undefined as Logger |undefined
 }
