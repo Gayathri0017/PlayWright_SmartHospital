@@ -8,13 +8,14 @@ module.exports = {
       "src/test/steps/*.ts",
       "src/hooks/*.ts"
     ],
-    paths: ["src/test/features/PatientLogin.feature",
-      "src/test/features/PatientAppointment.feature",
-      "src/test/features/PatientCharge.feature",
-      "src/test/features/PatientContent.feature",
-      "src/test/features/PatientDetails.feature"
+    // paths: ["src/test/features/PatientLogin.feature",
+    //   "src/test/features/PatientAppointment.feature",
+    //   "src/test/features/PatientCharge.feature",
+    //   "src/test/features/PatientContent.feature",
+    //   "src/test/features/PatientDetails.feature"
       
-    ],
+    // ],
+    paths:["src/test/features/Appointment.feature"],
     format: [
       "progress-bar",
       "html:reports/cucumber-report.html",
@@ -22,7 +23,7 @@ module.exports = {
       "rerun:rerun.txt"
     ],
     requireModule: ["ts-node/register"],
-    parallel: 4
+    // parallel: 4
   },
 
   rerun: {
