@@ -15,7 +15,12 @@ module.exports = {
     //   "src/test/features/PatientDetails.feature"
       
     // ],
-    paths:["src/test/features/Appointment.feature"],
+    paths:[
+    "src/test/features/Appointment.feature",
+      "src/test/features/TodoList.feature",
+      "src/test/features/PatientSearch.feature",
+      "src/test/features/Prescription.feature"
+    ],
     format: [
       "progress-bar",
       "html:reports/cucumber-report.html",
