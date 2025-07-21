@@ -69,10 +69,10 @@ export class AccountantPageIncome {
         try {
             await this.page.waitForTimeout(1000); // Wait for any animation
             await this.errorNotification.waitFor({ state: 'visible', timeout: 15000 });
-            console.log('Toast Notification Shown ✅');
+            console.log('Toast Notification Shown');
             return true;
         } catch {
-            console.log('Toast Notification NOT Shown ❌');
+            console.log('Toast Notification NOT Shown');
             return false;
         }
     }
@@ -81,10 +81,10 @@ export class AccountantPageIncome {
         try {
             await this.page.waitForTimeout(1000);
             await this.validationError.first().waitFor({ state: 'visible', timeout: 10000 });
-            console.log('Inline Validation Error Shown ✅');
+            console.log('Inline Validation Error Shown');
             return true;
         } catch {
-            console.log('Inline Validation Error NOT Shown ❌');
+            console.log('Inline Validation Error NOT Shown');
             return false;
         }
     }
