@@ -14,7 +14,7 @@ BeforeAll(async function(){
 Before(async function({pickle}){
     const scenarioName=pickle.name+pickle.id;
     context=await browser.newContext();
-    const page= await browser.newPage();
+    const page= await context.newPage();
     pageFixture.page=page;
     const baseUrl = process.env.BASEURL;
        if (!baseUrl) {
@@ -31,10 +31,12 @@ After(async function({pickle,result}){
         await this.attach(img,"image/png");
     }
     // await pageFixture.logger?.close();
-    // await pageFixture.page.close();
-    // await context.close();
+    await pageFixture.page.close();
+    await context.close();
 });
-// AfterAll(async function(){
-//     // await pageFixture.logger?.close();
-//     await browser.close();
-// });
+
+
+AfterAll(async function(){
+    // await pageFixture.logger?.close();
+    await browser.close();
+});
