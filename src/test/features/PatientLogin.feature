@@ -1,9 +1,7 @@
-Feature: Login with the Patient Login Credentials
+Feature: Dhanush_16JulyLogin with the Patient Login Credentials
   
   Background: 
     Given the User is on the Login Page
- 	# When the User clicks the User Login 
- 		
  		
   @LoginIntoPatient
   Scenario: To check Login as patient 

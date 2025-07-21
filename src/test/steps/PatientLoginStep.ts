@@ -17,18 +17,15 @@ Given('the User is on the Login Page', async function () {
 
  
 When('the User clicks the User Login',{ timeout: 20000 }, async function () {
-    // patientloginPage = new PatientLoginPage(pageFixture.page);
     await patientloginPage.clickUserLoginBtn();
          });
 
 
 When('the User clicks the Sign In button', async function () {
-    // patientloginPage = new PatientLoginPage(pageFixture.page);
     await patientloginPage.clickSignInBtn();
          });
 
 Then('the User is directed to the patient dashboard', async function () {
-    // patientloginPage = new PatientLoginPage(pageFixture?.page);
     dashboardPage = new DashboardPage(pageFixture.page);
     await pageFixture.page.waitForTimeout(3000);
     await dashboardPage.clickProfile();
@@ -38,12 +35,10 @@ Then('the User is directed to the patient dashboard', async function () {
 
 
 When('the User Provides invalid Username', async function () {
-    // patientloginPage = new PatientLoginPage(pageFixture?.page);
     await patientloginPage.emptyUsername();
  });
 
 Then('the User able to see the errorMessage as {string}', async function (error, dataTable) {
-    // patientloginPage = new PatientLoginPage(pageFixture?.page);
     const rows = dataTable.hashes();
 
     for (const row of rows){
@@ -62,6 +57,5 @@ Then('the User able to see the errorMessage as {string}', async function (error,
 
 
 When('the User Provides invalid Password', async function () {
-    // patientloginPage = new PatientLoginPage(pageFixture?.page);
     await patientloginPage.emptyPassword();
         });

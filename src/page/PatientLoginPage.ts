@@ -20,16 +20,13 @@ export default class PatientLoginPage {
     };
 
     async clickUserLoginBtn() {
-        const [newPage] = await Promise.all([
-        this.page.context().waitForEvent('page'),
-        this.page.locator(this.LoginPageElements.userLoginBtn).click()
-    ]);
-    await newPage.waitForLoadState('load');
-    return this.page = newPage;
+        this.page.locator(this.LoginPageElements.userLoginBtn).click();
+        this.page.goForward();
+
     }
 
     async clickSignInBtn() {
-            await this.page.locator(this.LoginPageElements.sigInBtn).click()
+            await this.page.locator(this.LoginPageElements.sigInBtn).click();
     }
 
     async provideUsername(username: string) {

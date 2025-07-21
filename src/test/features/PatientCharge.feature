@@ -2,7 +2,6 @@ Feature: Dhanush_20JULY2025_Patient_Charge_Details
   
   Background: 
     Given the User is on the Login Page
- 	And the User clicks the User Login 
   	And the User clicks the Sign In button
   	When the User is directed to the patient dashboard
   	Then the User clicks Ipd button 
