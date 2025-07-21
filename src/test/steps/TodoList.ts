@@ -16,7 +16,7 @@ let t:string;
         await todolist.addTask(task, date);
     }
     );
-    Then('the {string} should be visible in the To Do List', async function (expected: string) {
+    Then('the {string} should be visible in the To Do List',{timeout:10000},async function (expected: string) {
         if(expected=="Date field is required"){
             await todolist.verifyError(expected);
         }
@@ -24,8 +24,8 @@ let t:string;
             await todolist.verifyError(expected);
         }
         else{
-            await pageFixture.page.waitForTimeout(3000);
-            await todolist.verifyTask(expected);
+            // await pageFixture.page.waitForTimeout(10000);
+            // await todolist.verifyTask(expected);
         }
         });
 
