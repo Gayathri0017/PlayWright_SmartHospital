@@ -47,7 +47,6 @@ Before(async function ({ pickle }) {
     this.currentTestData = {};
     console.warn(`⚠️ No test data found for scenario: "${scenarioName}" — continuing without it.`);
   }
-});
 After(async function({pickle,result}){
     console.log(result?.status);
     if(result?.status==Status.FAILED){
@@ -58,6 +57,8 @@ After(async function({pickle,result}){
     await pageFixture.page.close();
     // await context.close();
 });
+
+
 AfterAll(async function(){
     // await pageFixture.logger?.close();
     await browser.close();

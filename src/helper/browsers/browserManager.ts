@@ -1,6 +1,11 @@
 import { LaunchOptions,chromium,firefox,webkit } from "@playwright/test";
-const options:LaunchOptions={
-    headless:!true
+import dotenv from "dotenv";
+
+dotenv.config({ path: "src/helper/env/.env.prod" });
+const headlessMode = String(process.env.HEAD) !== "true";
+
+const options: LaunchOptions = {
+    headless: headlessMode,
 }
 export const invokeBrowser=()=>{
     const browserType=process.env.npm_config_BROWSER || "chrome";
