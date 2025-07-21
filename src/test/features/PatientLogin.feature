@@ -1,8 +1,8 @@
 Feature: Login with the Patient Login Credentials
   
   Background: 
-    Given the User is on the Login Page
- 	When the User clicks the User Login 
+  Given the User is on the Login Page
+ 	# When the User clicks the User Login 
  		
  		
   @LoginIntoPatient
