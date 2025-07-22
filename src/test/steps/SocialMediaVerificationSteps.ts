@@ -1,98 +1,63 @@
-import { Given, When, Then, setDefaultTimeout } from '@cucumber/cucumber';
-import { expect, Locator } from '@playwright/test';
+import { Given, When, Then } from '@cucumber/cucumber';
+import { expect } from '@playwright/test';
 import { pageFixture } from '../../hooks/pageFixtures';
-import { SocialMediaVerificationPage } from '../../page/SocialMediaVerificationPage';
+import { SocialMediaPage } from '../../page/SocialMediaVerificationPage';
 
-setDefaultTimeout(60 * 1000);
-
-let socialPage: SocialMediaVerificationPage;
-let mainPage = pageFixture.page;
+let socialMediaPage: SocialMediaPage;
 
 Given('the user is on the application homepage', async function () {
-    await mainPage.goto('https://demo.smart-hospital.in/');
-    await mainPage.setViewportSize({ width: 1280, height: 720 });
-    socialPage = new SocialMediaVerificationPage(mainPage);
+  socialMediaPage = new SocialMediaPage(pageFixture.page);
+  await socialMediaPage.openHomePage();
 });
 
 When('the user checks all social media icons in the header', async function () {
-    // Action done in Then Step — Keeping placeholder for BDD structure
+  const count = await socialMediaPage.socialMediaLinks.count();
+  this.socialMediaCount = count;
 });
 
 Then('the user should see {int} social media links available', async function (expectedCount: number) {
-    const actualCount = await socialPage.getSocialMediaLinksCount();
-    expect(actualCount).toBe(expectedCount);
+  expect(this.socialMediaCount).toBe(expectedCount);
 });
 
-When('the user click on the {string} link', async function (linkName: string) {
-    type LinkName = 'facebook' | 'twitter' | 'youtube' | 'gmail' | 'linkedin' | 'instagram' | 'pinterest' | 'front page';
-    const linkMap: Record<LinkName, Locator> = {
-        'facebook': socialPage.facebookLink,
-        'twitter': socialPage.twitterLink,
-        'youtube': socialPage.youtubeLink,
-        'gmail': socialPage.gmailLink,
-        'linkedin': socialPage.linkedinLink,
-        'instagram': socialPage.instagramLink,
-        'pinterest': socialPage.pinterestLink,
-        'front page': socialPage.frontPageLink
-    };
+When('the user clicks on the {string} link', async function (linkName: string) {
+  const linkMap: { [key: string]: import('@playwright/test').Locator } = {
+    'Facebook': socialMediaPage.facebook,
+    'Twitter': socialMediaPage.twitter,
+    'YouTube': socialMediaPage.youtube,
+    'Gmail': socialMediaPage.gmail,
+    'LinkedIn': socialMediaPage.linkedin,
+    'Instagram': socialMediaPage.instagram,
+    'Pinterest': socialMediaPage.pinterest,
+  };
 
-    const lowerLinkName = linkName.toLowerCase() as LinkName;
-    const link = linkMap[lowerLinkName];
-    if (!link) throw new Error(`Unknown link: ${linkName}`);
-
-    const [newPage] = await Promise.all([
-        mainPage.context().waitForEvent('page'),
-        link.click()
-    ]);
-
-    this.newTab = newPage;
-    await newPage.waitForLoadState('domcontentloaded');
+  const link = linkMap[linkName as keyof typeof linkMap];
+  if (!link) throw new Error(`Unknown link: ${linkName}`);
+  const [newPage] = await Promise.all([
+    pageFixture.page.context().waitForEvent('page'),
+    link.click(),
+  ]);
+  this.newPage = newPage;
+  await newPage.waitForLoadState('domcontentloaded');
 });
 
-Then('the user should see the correct {string} page title', async function (platform: string) {
-    const newPage = this.newTab;
-    const title = await newPage.title();
-    const url = newPage.url();
+Then('the user should see the correct {string} page title', async function (expected: string) {
+  const title = await this.newPage.title();
+  console.log(`Opened Page Title: ${title}`);
+  expect(title.toLowerCase()).toContain(expected.toLowerCase());
+  await this.newPage.close();
+});
 
-    console.log(`URL: ${url}`);
-    console.log(`Title: ${title}`);
+Then('the user should be navigated to the correct {string} URL', async function (expectedUrl: string) {
+    const context = pageFixture.page.context();
+    const pages = context.pages();
 
-    switch (platform.toLowerCase()) {
-        case 'facebook':
-            expect(title.toLowerCase()).toContain('facebook');
-            break;
-        case 'twitter':
-            expect(
-                title.toLowerCase() === 'x' ||
-                url.includes('twitter.com') ||
-                url.includes('x.com')
-            ).toBeTruthy();
-            break;
-        case 'youtube':
-            expect(title.toLowerCase()).toContain('youtube');
-            break;
-        case 'gmail':
-            expect(
-                url.includes('googleblog.com') ||
-                url.includes('mail.google.com') ||
-                url.includes('accounts.google.com')
-            ).toBeTruthy();
-            break;
-        case 'linkedin':
-            expect(title.toLowerCase()).toContain('linkedin');
-            break;
-        case 'instagram':
-            expect(title.toLowerCase()).toContain('instagram');
-            break;
-        case 'pinterest':
-            expect(title.toLowerCase()).toContain('pinterest');
-            break;
-        case 'front page':
-            expect(title.toLowerCase()).toContain('smart hospital');
-            break;
-        default:
-            throw new Error(`Unknown platform: ${platform}`);
-    }
+    const newPage = pages.length > 1 ? pages[pages.length - 1] : pages[0];
+    await newPage.waitForLoadState();
 
-    await newPage.close();
+    const actualUrl = newPage.url();
+    console.log(`Expected URL: ${expectedUrl} | Actual URL: ${actualUrl}`);
+
+    expect(actualUrl).toContain(expectedUrl);
+
+    if (pages.length > 1) await newPage.close();
 });

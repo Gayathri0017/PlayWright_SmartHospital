@@ -1,3 +1,4 @@
+@Patient
 Feature: Dhanush_18JULY2025_Getting Content details from patient login
 Background: 
     Given the User is on the Login Page

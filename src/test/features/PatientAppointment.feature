@@ -1,3 +1,4 @@
+@Patient
 Feature: Dhanush_21JULY2025_Booking appointment using patient Login
 
 Background:

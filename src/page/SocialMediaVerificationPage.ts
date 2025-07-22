@@ -1,31 +1,29 @@
 import { Page, Locator } from '@playwright/test';
 
-export class SocialMediaVerificationPage {
-    readonly page: Page;
-    readonly facebookLink: Locator;
-    readonly twitterLink: Locator;
-    readonly youtubeLink: Locator;
-    readonly gmailLink: Locator;
-    readonly linkedinLink: Locator;
-    readonly instagramLink: Locator;
-    readonly pinterestLink: Locator;
-    readonly frontPageLink: Locator;
-    readonly socialMediaLinks: Locator;
+export class SocialMediaPage {
+  readonly page: Page;
+  readonly socialMediaLinks: Locator;
+  readonly facebook: Locator;
+  readonly twitter: Locator;
+  readonly youtube: Locator;
+  readonly gmail: Locator;
+  readonly linkedin: Locator;
+  readonly instagram: Locator;
+  readonly pinterest: Locator;
 
-    constructor(page: Page) {
-        this.page = page;
-        this.facebookLink = page.locator('(//ul[@class="social"])[1]//li[1]');
-        this.twitterLink = page.locator('//a[contains(@href, "twitter.com")]');
-        this.youtubeLink = page.locator('//a[contains(@href, "youtube.com")]');
-        this.gmailLink = page.locator('(//*[@href="https://plus.google.com/people"])[1]');
-        this.linkedinLink = page.locator('//a[contains(@href, "linkedin.com")]');
-        this.instagramLink = page.locator('//a[contains(@href, "instagram.com")]');
-        this.pinterestLink = page.locator('//a[contains(@href, "pinterest.com")]');
-        this.frontPageLink = page.locator('//*[@href="https://demo.smart-hospital.in"]');
-        this.socialMediaLinks = page.locator('(//*[@class="social"])[1]//li');
-    }
+  constructor(page: Page) {
+    this.page = page;
+    this.socialMediaLinks = page.locator('(//*[@class="social"])[1]//li');
+    this.facebook = page.locator('(//*[@class="social"])[1]//li[1]');
+    this.twitter = page.locator('(//*[@class="social"])[1]//li[2]');
+    this.youtube = page.locator('(//*[@class="social"])[1]//li[3]');
+    this.gmail = page.locator('(//*[@class="social"])[1]//li[4]');
+    this.linkedin = page.locator('(//*[@class="social"])[1]//li[5]');
+    this.instagram = page.locator('(//*[@class="social"])[1]//li[6]');
+    this.pinterest = page.locator('(//*[@class="social"])[1]//li[7]');
+  }
 
-    async getSocialMediaLinksCount(): Promise<number> {
-        return await this.socialMediaLinks.count();
-    }
+  async openHomePage() {
+    await this.page.goto('https://demo.smart-hospital.in/', { waitUntil: 'load' });
+  }
 }

@@ -1,3 +1,4 @@
+@Patient
 Feature: Dhanush_20JULY2025_Patient_Charge_Details
   
   Background: 

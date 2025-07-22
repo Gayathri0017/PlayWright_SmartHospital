@@ -82,5 +82,14 @@ export default class LoginPage {
         return text.trim();
       }
     }
+<<<<<<< HEAD
+=======
+    return '';
+  }
+  async doctorLogin() {
+    await this.doctorBtn.click();
+    await this.signinButton.click();
+  }
+>>>>>>> 228b482bc08ee87c7a16aa7d278e1c1a1d4dc76d
 }
 }
