@@ -1,3 +1,4 @@
+
 Feature: Gayathri_10JUL2025_Search Patient by Name In Smart Hospital
 Background:
   Given Doctor is logged in to the Smart Hospital system

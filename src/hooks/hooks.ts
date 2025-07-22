@@ -39,6 +39,7 @@ Before(async function ({ pickle }) {
     await page.goto(baseUrl, { timeout: 20000 });
   }
   // Attach test data if available
+
   const matchedData = appointmentData.find((data: any) => data.testName === scenarioName);
   if (matchedData) {
     this.currentTestData = matchedData;
