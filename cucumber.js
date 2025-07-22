@@ -3,7 +3,7 @@ module.exports = {
     formatOptions: {
       snippetInterface: "async-await"
     },
-    dryRun: false,
+    dryRun: true,
     require: [
       "src/test/steps/*.ts",
       "src/hooks/*.ts"
@@ -19,7 +19,8 @@ module.exports = {
     "src/test/features/Appointment.feature",
       "src/test/features/TodoList.feature",
       "src/test/features/PatientSearch.feature",
-      "src/test/features/Prescription.feature"
+      "src/test/features/Prescription.feature",
+      "src/test/features/VerifyLinks_Doctor.feature"
     ],
     format: [
       "progress-bar",

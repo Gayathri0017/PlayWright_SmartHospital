@@ -32,7 +32,7 @@ Before(async function ({ pickle }) {
     this.currentTestData=matchedData;
   } else {
     this.currentTestData={};
-    console.warn(`⚠️ No test data found for scenario: "${scenarioName}" — continuing without it.`);
+    // console.warn(`⚠️ No test data found for scenario: "${scenarioName}" — continuing without it.`);
   }
 });
 After(async function ({ pickle, result }) {
