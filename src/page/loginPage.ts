@@ -84,8 +84,6 @@ export default class LoginPage {
     }
     return '';
   }
-
-  // Added from initial requirement
   async doctorLogin() {
     await this.doctorBtn.click();
     await this.signinButton.click();

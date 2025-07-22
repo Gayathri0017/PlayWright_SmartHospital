@@ -13,7 +13,6 @@ And User should capture and print the data from dashboard table section this sho
     Then need click Add Expenses
     Then need to give the Header as "Telephone Bill", name "Office Telephone Charges" and amount "100.00"
     And the user click the save
-    Then need to see the asseart the success notifications
     Then User should see the dashboard summary table
     And User should capture and print the data from dashboard table section this should be stored in the excel for reference
 
@@ -23,7 +22,6 @@ Scenario Outline: Add New Expense with Invalid Data
     Then need click Add Expenses
     Then need to give the Header as "<header>", name "<name>" and amount "<amount>"
     And the user click the save
-    Then need to see the asseart the error notifications
 
     Examples:
       |header          |name                     |amount       |

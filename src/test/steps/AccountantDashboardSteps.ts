@@ -58,3 +58,11 @@ Then('need to see the asseart the error notifications', async function () {
     const isErrorDisplayed = await accountantPage.isErrorNotificationDisplayed();
     expect(isErrorDisplayed).toBeTruthy();
 });
+
+Then('User should not see the new entry added in the dashboard summary table', async function () {
+    const page = pageFixture.page;
+    const summaryTable = page.locator('(//div[@class="row"])[2]');
+    await expect(summaryTable).toBeVisible();
+    const tableContent = await summaryTable.textContent();
+    expect(tableContent).not.toContain('Telephone Bill');
+});
