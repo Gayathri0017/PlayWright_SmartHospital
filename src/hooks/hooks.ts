@@ -3,6 +3,7 @@ import { Browser, BrowserContext } from "@playwright/test";
 import { pageFixture } from "./pageFixtures";
 import { getEnv } from "../helper/env/env";
 import { invokeBrowser } from "../helper/browsers/browserManager";
+import appointmentData from "../helper/Util/AppointmentData.json";
 let browser: Browser;
 let context: BrowserContext;
 
@@ -37,15 +38,15 @@ Before(async function ({ pickle }) {
   } else {
     await page.goto(baseUrl, { timeout: 20000 });
   }
-
   // Attach test data if available
-  // const matchedData = appointmentData.find((data: any) => data.testName === scenarioName);
-  // if (matchedData) {
-  //   this.currentTestData = matchedData;
-  // } else {
-  //   this.currentTestData = {};
-  //   console.warn(`⚠️ No test data found for scenario: "${scenarioName}" — continuing without it.`);
-  // }
+
+  const matchedData = appointmentData.find((data: any) => data.testName === scenarioName);
+  if (matchedData) {
+    this.currentTestData = matchedData;
+  } else {
+    this.currentTestData = {};
+    // console.warn(`⚠️ No test data found for scenario: "${scenarioName}" — continuing without it.`);
+  }
 });
 
 After(async function ({ pickle, result }) {

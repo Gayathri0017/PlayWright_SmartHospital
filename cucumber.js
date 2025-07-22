@@ -8,7 +8,19 @@ module.exports = {
       "src/test/steps/*.ts",
       "src/hooks/*.ts"
     ],
-
+    // paths: ["src/test/features/PatientLogin.feature",
+    //   "src/test/features/PatientAppointment.feature",
+    //   "src/test/features/PatientCharge.feature",
+    //   "src/test/features/PatientContent.feature",
+    //   "src/test/features/PatientDetails.feature"
+    // ],
+    // paths:[
+    // "src/test/features/Appointment.feature",
+    //   "src/test/features/TodoList.feature",
+    //   "src/test/features/PatientSearch.feature",
+    //   "src/test/features/Prescription.feature"
+    //   // "src/test/features/VerifyLinks_Doctor.feature"
+    // ],
     paths: ["src/test/features/*.feature"],
     format: [
       "progress-bar",
@@ -18,7 +30,6 @@ module.exports = {
     ],
     requireModule: ["ts-node/register"]
   },
-
   rerun: {
     formatOptions: {
       snippetInterface: "async-await"
