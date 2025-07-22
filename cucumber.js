@@ -36,6 +36,7 @@ module.exports = {
       snippetInterface: "async-await"
     },
     dryRun: false,
+    paths: ["@rerun.txt"],
     require: [
       "src/test/steps/*.ts",
       "src/hooks/*.ts"
