@@ -3,7 +3,6 @@ import { Browser, BrowserContext } from "@playwright/test";
 import { pageFixture } from "./pageFixtures";
 import { getEnv } from "../helper/env/env";
 import { invokeBrowser } from "../helper/browsers/browserManager";
-import appointmentData from "../helper/util/AppointmentData.json";
 let browser: Browser;
 let context: BrowserContext;
 
