@@ -37,7 +37,7 @@ export default class PatientAppointmentPage{
     }
 
     async setDate(date: string | null) {
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(1000);
     const dateField = this.page.locator(this.PatientAppointmentElements.dateField);
     await dateField.waitFor({ state: "visible" });
 
@@ -52,7 +52,7 @@ export default class PatientAppointmentPage{
 }
 
 async setSpecialist(specialist: string) {
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(1000);
     const specialistDropdown = this.page.locator(this.PatientAppointmentElements.specialist);
     await specialistDropdown.scrollIntoViewIfNeeded();
     await specialistDropdown.waitFor({ state: "visible" });
@@ -66,7 +66,7 @@ async setSpecialist(specialist: string) {
 }
 
 async setDoctor(doctor: string) {
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(1000);
     const doctorDropdown = this.page.locator(this.PatientAppointmentElements.doctor);
     await doctorDropdown.waitFor({ state: "visible" });
     await doctorDropdown.click();
@@ -75,7 +75,7 @@ async setDoctor(doctor: string) {
 }
 
 async setShift(shift: string) {
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(1000);
     const shiftDropdown = this.page.locator(this.PatientAppointmentElements.shift);
     await shiftDropdown.waitFor({ state: "attached" });
     await shiftDropdown.selectOption({ label: shift });
@@ -83,7 +83,7 @@ async setShift(shift: string) {
 }
 
 async setTime(slot: string) {
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(1000);
     const slotDropdown = this.page.locator(this.PatientAppointmentElements.slot);
     await slotDropdown.waitFor({ state: "visible" });
     await slotDropdown.click();
@@ -92,7 +92,7 @@ async setTime(slot: string) {
 }
 
 async setAvailableTime() {
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(1000);
     const availableSlot = this.page.locator(this.PatientAppointmentElements.availableSlot);
     await availableSlot.scrollIntoViewIfNeeded();
     await availableSlot.waitFor({ state: "visible" });
@@ -112,7 +112,7 @@ async alert() {
 }
 
 async setMessage(message: string) {
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(1000);
     const messageField = this.page.locator(this.PatientAppointmentElements.message);
     await messageField.scrollIntoViewIfNeeded();
     await messageField.waitFor({ state: "attached" });
@@ -127,19 +127,19 @@ async setMessage(message: string) {
 }
 
 async getError(): Promise<string> {
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(1000);
     const errorMsg = this.page.locator(this.PatientAppointmentElements.filedReq);
     await errorMsg.waitFor({ state: "visible" });
     return await errorMsg.innerText();
 }
 
 async getSuccessMsg(): Promise<string> {
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(1000);
     return await this.page.locator(this.PatientAppointmentElements.success).innerText();
 }
 
 async ClicksaveBtn(){
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(1000);
     await this.page.locator(this.PatientAppointmentElements.saveBtn).click();
 }
 

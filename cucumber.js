@@ -28,7 +28,8 @@ module.exports = {
       "json:test-results/cucumber-report.json",
       "rerun:rerun.txt"
     ],
-    requireModule: ["ts-node/register"]
+    requireModule: ["ts-node/register"],
+    parallel: 4
   },
   rerun: {
     formatOptions: {
@@ -44,6 +45,7 @@ module.exports = {
       "html:reports/cucumber-rerun-report.html",
       "json:test-results/cucumber-rerun.json"
     ],
-    requireModule: ["ts-node/register"]
+    requireModule: ["ts-node/register"],
+    parallel: 4
   }
 };
