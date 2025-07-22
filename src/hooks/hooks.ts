@@ -39,13 +39,13 @@ Before(async function ({ pickle }) {
   }
 
   // Attach test data if available
-  const matchedData = appointmentData.find((data: any) => data.testName === scenarioName);
-  if (matchedData) {
-    this.currentTestData = matchedData;
-  } else {
-    this.currentTestData = {};
-    console.warn(`⚠️ No test data found for scenario: "${scenarioName}" — continuing without it.`);
-  }
+  // const matchedData = appointmentData.find((data: any) => data.testName === scenarioName);
+  // if (matchedData) {
+  //   this.currentTestData = matchedData;
+  // } else {
+  //   this.currentTestData = {};
+  //   console.warn(`⚠️ No test data found for scenario: "${scenarioName}" — continuing without it.`);
+  // }
 });
 
 After(async function ({ pickle, result }) {
