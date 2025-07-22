@@ -1,8 +1,8 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import AppointmentPage from "./../../page/AppointmentPage";
 import { pageFixture } from "../../hooks/pageFixtures";
-import appointmentData from "./../../helper/util/AppointmentData.json";
-import { currentTestData } from "../../hooks/hooks";
+import appointmentData from "./../../helper/Util/AppointmentData.json";
+// import { currentTestData } from "../../hooks/hooks";
 let appointmentPage:AppointmentPage;
 Given('the User navigate to the appointment section', async function () {
     appointmentPage=new AppointmentPage(pageFixture.page);

@@ -1,3 +1,4 @@
+@Patient
 Feature: Dhanush_20JULY2025_Getting Patient details
 
 Background:

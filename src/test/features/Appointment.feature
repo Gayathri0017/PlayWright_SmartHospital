@@ -1,3 +1,4 @@
+#
 Feature: Gayathri_20JUL2025_Manage Appointments in Smart Hospital
 Background:
     Given Doctor is logged in to the Smart Hospital system
@@ -26,5 +27,3 @@ Examples:
   | Year  | Year field is required        |
   | Month | Month field is required       |
   | Day   | Day field is required         |
-
-  

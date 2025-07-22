@@ -1,3 +1,4 @@
+@Patient
 Feature: Dhanush_16JULYLogin with the Patient Login Credentials
   
   Background: 
