@@ -51,4 +51,8 @@ async selectDropdown(dropdownLocator: string, optionText: string) {
     const actual=await this.page.textContent(this.PrescriptionElements.toastMsg);
     await expect(actual).toContain(expected);
   }
+  async assertPrescriptionPage() {
+  const header = await this.page.textContent('h4#prescription_title');
+  expect(header).toContain('Add Prescription');
+}
 }
