@@ -8,6 +8,7 @@ let patientAppointmentPage : PatientAppointmentPage;
 Then('the User is able to see the add appointment option', async function () {
   patientAppointmentPage = new PatientAppointmentPage(pageFixture.page);
   await patientAppointmentPage.ClickAddAppointment();
+  pageFixture.logger?.info("add appointment button is visible");
          });
 
 Then('the User can fill the appointment form', async function () {
@@ -23,11 +24,13 @@ Then('the User can fill the appointment form', async function () {
       detail.message
     );
    }
+   pageFixture.logger?.info("patient appointment details are passed by the csv file");
          });
 
 Then('the User should save the form for appointment', async function () {
   patientAppointmentPage = new PatientAppointmentPage(pageFixture.page);
   await patientAppointmentPage.ClicksaveBtn();
+  pageFixture.logger?.info("Save button is clicked");
          });
 
 Then('the User is able see the success message {string}', async function (confirmationMessage) {
@@ -36,6 +39,7 @@ Then('the User is able see the success message {string}', async function (confir
   if(sussmsg === confirmationMessage){
     console.log("----------Appointment booked successfully-------")
   }
+  pageFixture.logger?.info("The successful message is visible");
          });
 
 
@@ -51,7 +55,7 @@ Then('the User can fill the appointment', async function (dataTable) {
     await patientAppointmentPage.setAvailableTime();
     await patientAppointmentPage.setMessage(appointmentDetails.Message);
   }
-  
+  pageFixture.logger?.info("patient appointment details are passed by data table");
          });
 
 
@@ -61,4 +65,5 @@ Then('the User can able to see the error msg {string}', async function (errorMsg
   if (errorMessage === errorMsg){
     console.log("Asserted correctly for the error message");
   }
+  pageFixture.logger?.info("The error message is visible");
          });
