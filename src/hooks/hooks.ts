@@ -4,6 +4,8 @@ import { pageFixture } from "./pageFixtures";
 import { getEnv } from "../helper/env/env";
 import { invokeBrowser } from "../helper/browsers/browserManager";
 import appointmentData from "../helper/Util/AppointmentData.json";
+import { options } from "../helper/Util/logger";
+import { createLogger } from "winston";
 let browser: Browser;
 let context: BrowserContext;
 
@@ -47,6 +49,7 @@ Before(async function ({ pickle }) {
     this.currentTestData = {};
     // console.warn(`⚠️ No test data found for scenario: "${scenarioName}" — continuing without it.`);
   }
+  pageFixture.logger=createLogger(options(scenarioName));
 });
 
 After(async function ({ pickle, result }) {

@@ -14,14 +14,14 @@ module.exports = {
     //   "src/test/features/PatientContent.feature",
     //   "src/test/features/PatientDetails.feature"
     // ],
-    // paths:[
-    // "src/test/features/Appointment.feature",
-    //   "src/test/features/TodoList.feature",
-    //   "src/test/features/PatientSearch.feature",
-    //   "src/test/features/Prescription.feature"
-    //   // "src/test/features/VerifyLinks_Doctor.feature"
-    // ],
-    paths: ["src/test/features/*.feature"],
+    paths:[
+    "src/test/features/Appointment.feature",
+      "src/test/features/TodoList.feature",
+      "src/test/features/PatientSearch.feature",
+      "src/test/features/Prescription.feature"
+      // "src/test/features/VerifyLinks_Doctor.feature"
+    ],
+    // paths: ["src/test/features/*.feature"],
     format: [
       "progress-bar",
       "html:reports/cucumber-report.html",
