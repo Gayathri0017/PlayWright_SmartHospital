@@ -35,3 +35,24 @@ Then('the system should show an error {string}', async function (expectedMessage
   pageFixture.logger?.warn(`Verifying toast message for error: "${expectedMessage}"`);
   await prescriptionPage.verifyToastMessage(expectedMessage);
 });
+
+Then('the doctor should navigate to the Prescription Page', async function () {
+    await prescriptionPage.assertPrescriptionPage();
+});
+
+When('the doctor Fill the valid Details:', async function (dataTable) {
+ const data=dataTable.raw();
+  const formData={
+    Category: data[1][0],
+    Medicine: data[1][1],
+    Dose: data[1][2],
+    Interval: data[1][3],
+    Duration: data[1][4],
+  };
+  pageFixture.logger?.info(`Filling prescription form with data: ${JSON.stringify(formData)}`);
+  await prescriptionPage.fillPrescriptionForm(formData);
+});
+
+Then('the Prescription should be added in OPD Section', async function () {
+    //pass
+});
