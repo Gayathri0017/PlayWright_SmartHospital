@@ -1,38 +1,38 @@
 import { Page, APIRequestContext } from '@playwright/test';
-export class DoctorPage{
-  constructor(private page: Page, private request: APIRequestContext) {}
-  async getAllLinks(): Promise<string[]> {
-    const links=await this.page.$$eval('a',anchors =>
-      anchors.map(a => a.getAttribute('href')));
-    return links as string[];
+export class DoctorPage {
+  private page: Page;
+  private request:APIRequestContext;
+  constructor(page:Page,request: APIRequestContext) {
+    this.page=page;
+    this.request=request;
   }
-
-  async checkStatus(link: string): Promise<number> {
-    try {
-      const response = await this.request.head(link);
-      return response.status();
-    }catch (error) {
-      return 0;
+async validateLinks(): Promise<{ valid: string[]; broken: string[] }> {
+  const validLinks: string[]=[];
+  const brokenLinks: string[]=[];
+  await this.page.waitForLoadState('networkidle');
+  await this.page.waitForSelector('a[href]', { timeout: 5000 });
+  const links=await this.page.$$eval('a[href]', anchors =>
+    anchors.map(anchor => (anchor as HTMLAnchorElement).href)
+  );
+  for (const link of links) {
+    if (link.startsWith('javascript')||link.startsWith('mailto:')||link.startsWith('tel:')||!link.startsWith('http'))
+    {
+      continue;
     }
-  }
-
-  async validateLinks(): Promise<{ valid: string[]; broken: string[]}> {
-    const links=await this.getAllLinks();
-    const valid: string[]=[];
-    const broken: string[]=[];
-    for (const link of links) {
-      if (link.startsWith('javascript') || link.startsWith('mailto') || link.trim() === ''){
-        continue;
-      }
-      
-      const fullLink=link.startsWith('http') ? link : new URL(link, this.page.url()).href;
-      const status=await this.checkStatus(fullLink);
-      if (status >= 200 && status < 400) {
-        valid.push(fullLink);
-      } else {
-        broken.push(fullLink);
+    try{
+      const absoluteLink=new URL(link, this.page.url()).href;
+      const response=await this.request.get(absoluteLink);
+      if(response.ok()) {
+        validLinks.push(absoluteLink);
+      }else {
+        brokenLinks.push(absoluteLink);
       }
     }
-    return { valid, broken };
+    catch (error) {
+      brokenLinks.push(link);
+    }
   }
+  return { valid: validLinks, broken: brokenLinks };
+}
+
 }
