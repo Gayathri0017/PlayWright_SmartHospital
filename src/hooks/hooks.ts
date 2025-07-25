@@ -6,6 +6,7 @@ import { invokeBrowser } from "../helper/browsers/browserManager";
 import appointmentData from "../helper/Util/AppointmentData.json";
 import { options } from "../helper/Util/logger";
 import { createLogger } from "winston";
+import { request as playwrightRequest, chromium } from "@playwright/test";
 let browser: Browser;
 let context: BrowserContext;
 
@@ -16,9 +17,12 @@ BeforeAll(async function () {
 
 Before(async function ({ pickle }) {
   const scenarioName = pickle.name;
-  context = await browser.newContext();
-  const page = await context.newPage();
-  pageFixture.page = page;
+  context=await browser.newContext();
+  
+  const page=await context.newPage();
+  const apiRequestContext=await playwrightRequest.newContext();
+  pageFixture.page=page;
+  pageFixture.request=apiRequestContext;
 
   const scenarioTags = pickle.tags.map((tag: any) => tag.name);
   const baseUrl = process.env.BASEURL;
