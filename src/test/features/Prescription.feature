@@ -16,4 +16,14 @@ Examples:
   | Select  | Select   | Select   |  Select         | Select   | Please select any one pathology, radiology or medicine details |
   | Syrup   | Select   | Select   |  Only one a day | Morning  | Medicine field is required                                     |
   | Syrup   | Select   | 1 (CT)   | Only one a day  | Morning  | Medicine field is required                                     |
+
+  @Positive_Prescription_Validation
+  Scenario: verify the prescription feature by providing valid informations
+  		And Clicks the Add Prescription
+  		Then the doctor should navigate to the Prescription Page
+    	When the doctor Fill the valid Details:
+    	|Finding Category| Medicine Category|Medicine|Dose Interval |Dose Duration|
+    	|Syrup			 | Alprovit         |1  (CT) |Only one a day|Morning      |
+    	And Clicks Save button
+    	Then the Prescription should be added in OPD Section
   

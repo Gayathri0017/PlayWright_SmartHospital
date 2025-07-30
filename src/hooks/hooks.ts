@@ -6,6 +6,7 @@ import { invokeBrowser } from "../helper/browsers/browserManager";
 import appointmentData from "../helper/Util/AppointmentData.json";
 import { options } from "../helper/Util/logger";
 import { createLogger } from "winston";
+import { request as playwrightRequest, chromium } from "@playwright/test";
 let browser: Browser;
 let context: BrowserContext;
 
@@ -16,9 +17,12 @@ BeforeAll(async function () {
 
 Before(async function ({ pickle }) {
   const scenarioName = pickle.name;
-  context = await browser.newContext();
-  const page = await context.newPage();
-  pageFixture.page = page;
+  context=await browser.newContext();
+  await context.tracing.start({ screenshots: true, snapshots: true });
+  const page=await context.newPage();
+  const apiRequestContext=await playwrightRequest.newContext();
+  pageFixture.page=page;
+  pageFixture.request=apiRequestContext;
 
   const scenarioTags = pickle.tags.map((tag: any) => tag.name);
   const baseUrl = process.env.BASEURL;
@@ -47,23 +51,45 @@ Before(async function ({ pickle }) {
     this.currentTestData = matchedData;
   } else {
     this.currentTestData = {};
-    // console.warn(`⚠️ No test data found for scenario: "${scenarioName}" — continuing without it.`);
   }
   pageFixture.logger=createLogger(options(scenarioName));
 });
 
-After(async function ({ pickle, result }) {
-  console.log(`Scenario "${pickle.name}" finished with status: ${result?.status}`);
-  if (result?.status === Status.FAILED) {
-    const img = await pageFixture.page.screenshot({
-      path: `./test-result/screenshots/${pickle.name}.png`,
-      type: "png",
+// After(async function ({ pickle, result }) {
+//   console.log(`Scenario "${pickle.name}" finished with status: ${result?.status}`);
+//   if (result?.status === Status.FAILED) {
+//     const img = await pageFixture.page.screenshot({
+//       path: `./test-result/screenshots/${pickle.name}.png`,
+//       type: "png",
+//     });
+//     await this.attach(img, "image/png");
+//   }
+//   await pageFixture.page.close();
+//   await context.close();
+// });
+After(async function({ pickle, result }) {
+  const scenarioName=pickle.name.replace(/\s+/g, "_");
+  console.log(`Scenario "${pickle.name}" status: ${result?.status}`);
+
+  if (result?.status===Status.FAILED) {
+    // Save screenshot
+    const screenshot=await pageFixture.page.screenshot({
+      path:`./test-result/screenshots/${scenarioName}.png`,
+      type:"png",
     });
-    await this.attach(img, "image/png");
+    await this.attach(screenshot, "image/png");
+    // Save trace
+    const tracePath=`./test-result/traces/${scenarioName}.zip`;
+    await context.tracing.stop({ path: tracePath });
+    await this.attach(`Trace: ${tracePath}`);
+  }
+  else{
+    await context.tracing.stop();
   }
   await pageFixture.page.close();
   await context.close();
 });
+
 
 AfterAll(async function () {
   await browser.close();
